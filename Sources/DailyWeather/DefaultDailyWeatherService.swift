@@ -27,6 +27,10 @@ public final class DefaultDailyWeatherService: NSObject, DailyWeatherService  {
         locationManager.delegate = self
     }
     
+    public func locationPermission() -> CLAuthorizationStatus {
+        locationManager.authorizationStatus
+    }
+    
     public func requestLocationPermission() async throws {
         switch locationManager.authorizationStatus {
         case .notDetermined:

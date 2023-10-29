@@ -16,6 +16,10 @@ public class MockedDailyWeatherService: DailyWeatherService {
         return
     }
     
+    public func locationPermission() -> CLAuthorizationStatus {
+        .authorizedAlways
+    }
+    
     public func updateLocation() async throws -> CLLocation {
         Logger.weatherHandler.debug("DailyWeatherService returning mocked location")
         return CLLocation(latitude: 37.3346, longitude: 122.0090) // Apple Park, Cupertino
