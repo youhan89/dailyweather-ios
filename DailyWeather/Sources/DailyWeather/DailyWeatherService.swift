@@ -1,0 +1,15 @@
+//
+//  File.swift
+//  
+//
+//  Created by Johan Sögaard on 2023-10-29.
+//
+
+import CoreLocation
+import Foundation
+
+public protocol DailyWeatherService {
+    func requestLocationPermission() async throws
+    func updateLocation() async throws -> CLLocation
+    func updateWeather(forLocation location: CLLocation) async throws -> [DailyForecast]
+}
