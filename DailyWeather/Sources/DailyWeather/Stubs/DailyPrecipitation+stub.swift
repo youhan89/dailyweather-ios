@@ -7,7 +7,7 @@
 
 import Foundation
 
-extension DailyPrecipitation {
+public extension DailyPrecipitation {
     static func stubNoRain() -> DailyPrecipitation {
         DailyPrecipitation(
             rainfallAmount: Measurement(value: 0.0, unit: .millimeters),

@@ -23,6 +23,6 @@ public class MockedDailyWeatherService: DailyWeatherService {
     
     public func updateWeather(forLocation location: CLLocation) async throws -> [DailyForecast] {
         Logger.weatherHandler.debug("DailyWeatherService returning mocked forecast")
-        return [.stub()]
+        return [ .stubSunnyDay(), .stubRainyDay(), .stubSnowDay() ]
     }
 }

@@ -7,7 +7,7 @@
 
 import Foundation
 
-extension DailySun {
+public extension DailySun {
     static func stub() -> DailySun {
         return DailySun(
             sunrise: StubUtils.sunriseDate,

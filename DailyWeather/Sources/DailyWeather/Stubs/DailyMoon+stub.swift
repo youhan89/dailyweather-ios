@@ -7,7 +7,7 @@
 
 import Foundation
 
-extension DailyMoon {
+public extension DailyMoon {
     static func stub() -> DailyMoon {
         DailyMoon(
             moonrise: StubUtils.moonriseDate,

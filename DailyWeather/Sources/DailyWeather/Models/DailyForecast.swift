@@ -22,7 +22,7 @@ public final class DailyForecast: Identifiable {
     public let moon: DailyMoon?
     public let sun: DailySun?
     
-    init(
+    public init(
         date: Date,
         highTemperature: Measurement<UnitTemperature>,
         lowTemperature: Measurement<UnitTemperature>,
@@ -45,12 +45,12 @@ public final class DailyForecast: Identifiable {
     }
 }
 
-extension DailyForecast {
-    public var weekday: String {
+public extension DailyForecast {
+    var weekday: String {
         DateFormatter().weekdaySymbols[Calendar.current.component(.weekday, from: date) - 1]
     }
     
-    public var dateFormatted: String {
+    var dateFormatted: String {
         let dateFormatter = DateFormatter()
         dateFormatter.dateStyle = .medium
         dateFormatter.timeStyle = .none
@@ -58,8 +58,8 @@ extension DailyForecast {
         return dateFormatter.string(from: date)
     }
     
-    public var highTemperatureFormatted: String { highTemperature.formatted() }
-    public var lowTemperatureFormatted: String { lowTemperature.formatted() }
+    var highTemperatureFormatted: String { highTemperature.formatted() }
+    var lowTemperatureFormatted: String { lowTemperature.formatted() }
 }
 
 extension DailyForecast: Hashable {

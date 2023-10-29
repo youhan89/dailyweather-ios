@@ -7,8 +7,8 @@
 
 import Foundation
 
-extension DailyWind {
-    public static func stubLow() -> DailyWind {
+public extension DailyWind {
+    static func stubLow() -> DailyWind {
         DailyWind(
             speed: Measurement(value: 1.0, unit: .metersPerSecond),
             gusts: Measurement(value: 3.0, unit: .metersPerSecond),
@@ -16,7 +16,7 @@ extension DailyWind {
         )
     }
     
-    public static func stubNormal() -> DailyWind {
+    static func stubNormal() -> DailyWind {
         DailyWind(
             speed: Measurement(value: 8.0, unit: .metersPerSecond),
             gusts: Measurement(value: 12.0, unit: .metersPerSecond),
@@ -24,7 +24,7 @@ extension DailyWind {
         )
     }
     
-    public static func stubHigh() -> DailyWind {
+    static func stubHigh() -> DailyWind {
         DailyWind(
             speed: Measurement(value: 20.0, unit: .metersPerSecond),
             gusts: Measurement(value: 30.0, unit: .metersPerSecond),

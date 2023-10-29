@@ -5,6 +5,7 @@
 //  Created by Johan Sögaard on 2023-10-29.
 //
 
+import CoreLocation
 import Foundation
 
 final class StubUtils {
@@ -16,6 +17,11 @@ final class StubUtils {
     
     private static var utcTimeZone: TimeZone {
         TimeZone(identifier: "UTC")!
+    }
+    
+    static var applePark: CLLocation {
+        // Apple Park, Cupertino
+        CLLocation(latitude: 37.3346, longitude: 122.0090)
     }
     
     static var sunriseDate: Date {
