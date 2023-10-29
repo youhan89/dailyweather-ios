@@ -12,7 +12,7 @@ import OSLog
 public class MockedDailyWeatherService: DailyWeatherService {
     public init() {}
     
-    public func requestLocationPermission() async throws {
+    public func requestLocationPermission(always: Bool) async throws {
         return
     }
     

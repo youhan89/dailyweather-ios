@@ -31,13 +31,17 @@ public final class DefaultDailyWeatherService: NSObject, DailyWeatherService  {
         locationManager.authorizationStatus
     }
     
-    public func requestLocationPermission() async throws {
+    public func requestLocationPermission(always: Bool = false) async throws {
         switch locationManager.authorizationStatus {
         case .notDetermined:
-            Logger.weatherHandler.info("Location permission requested]")
+            Logger.weatherHandler.info("Location permission requested [always: \(always)]")
             try await withCheckedThrowingContinuation { continuation in
                 locationPermissionContinuation = continuation
-                locationManager.requestWhenInUseAuthorization()
+                if always {
+                    locationManager.requestAlwaysAuthorization()
+                } else {
+                    locationManager.requestWhenInUseAuthorization()
+                }
             }
             
         case .authorizedAlways, .authorizedWhenInUse:
@@ -81,6 +85,13 @@ public final class DefaultDailyWeatherService: NSObject, DailyWeatherService  {
 extension DefaultDailyWeatherService: CLLocationManagerDelegate {
     public func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         Logger.weatherHandler.error("LocationManager failed with error \(String(describing: error))]")
+        if let locationContinuation {
+            locationContinuation.resume(throwing: error)
+        }
+        
+        if let locationPermissionContinuation {
+            locationPermissionContinuation.resume(throwing: error)
+        }
     }
     
     public func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
