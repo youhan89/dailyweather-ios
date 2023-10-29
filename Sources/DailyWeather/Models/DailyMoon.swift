@@ -9,9 +9,9 @@ import Foundation
 import WeatherKit
 
 public struct DailyMoon {
-    let moonrise: Date
-    let moonset: Date
-    let moonPhase: DailyMoonPhase
+    public let moonrise: Date
+    public let moonset: Date
+    public let moonPhase: DailyMoonPhase
 }
 
 public extension DailyMoon {
