@@ -84,6 +84,8 @@ public extension DailyForecast {
             precipitation: .from(weatherKit),
             moon: .from(weatherKit.moon),
             sun: .from(weatherKit.sun)
+            // UVINDEX
+            // weatherKit.condition
         )
     }
 }

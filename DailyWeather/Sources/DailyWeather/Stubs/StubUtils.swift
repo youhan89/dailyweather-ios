@@ -24,6 +24,21 @@ final class StubUtils {
         CLLocation(latitude: 37.3346, longitude: 122.0090)
     }
     
+    static var forecastDate: Date {
+        // Define the components for your specific date
+        var dateComponents = DateComponents()
+        dateComponents.year = 2023
+        dateComponents.month = 10
+        dateComponents.day = 29
+        dateComponents.hour = 12
+        dateComponents.minute = 0
+        dateComponents.second = 0
+        dateComponents.timeZone = utcTimeZone
+
+        // Create a Date object using the Calendar and components
+        return calendar.date(from: dateComponents)!
+    }
+    
     static var sunriseDate: Date {
         // Define the components for your specific date
         var dateComponents = DateComponents()

@@ -11,11 +11,11 @@ import Foundation
 public extension DailyForecast {
     static func stubRainyDay() -> DailyForecast {
         DailyForecast(
-            date: Date(),
+            date: StubUtils.forecastDate,
             highTemperature: Measurement(value: 20.0, unit: .celsius),
             lowTemperature: Measurement(value: 10.0, unit: .celsius),
             sfSymbol: "cloud.rain.fill",
-            wind: .stubLow(),
+            wind: .stubNormal(),
             description: "Light rain",
             precipitation: .stubLightRain(),
             moon: .stub(),
@@ -25,7 +25,7 @@ public extension DailyForecast {
     
     static func stubSunnyDay() -> DailyForecast {
         DailyForecast(
-            date: Date(),
+            date: StubUtils.forecastDate,
             highTemperature: Measurement(value: 30.0, unit: .celsius),
             lowTemperature: Measurement(value: 25.0, unit: .celsius),
             sfSymbol: "sun.max",
@@ -39,11 +39,11 @@ public extension DailyForecast {
     
     static func stubSnowDay() -> DailyForecast {
         DailyForecast(
-            date: Date(),
+            date: StubUtils.forecastDate,
             highTemperature: Measurement(value: 0.0, unit: .celsius),
             lowTemperature: Measurement(value: -5.0, unit: .celsius),
             sfSymbol: "cloud.snow",
-            wind: .stubLow(),
+            wind: .stubHigh(),
             description: "Snow",
             precipitation: .stubLightSnow(),
             moon: .stub(),
