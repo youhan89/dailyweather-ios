@@ -86,10 +86,18 @@ extension DefaultDailyWeatherService: CLLocationManagerDelegate {
     public func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         Logger.weatherHandler.error("LocationManager failed with error \(String(describing: error))]")
         if let locationContinuation {
+            defer {
+                self.locationContinuation = nil
+            }
+            
             locationContinuation.resume(throwing: error)
         }
         
         if let locationPermissionContinuation {
+            defer {
+                self.locationPermissionContinuation = nil
+            }
+            
             locationPermissionContinuation.resume(throwing: error)
         }
     }
@@ -101,8 +109,14 @@ extension DefaultDailyWeatherService: CLLocationManagerDelegate {
         
         switch manager.authorizationStatus {
         case .authorizedAlways, .authorizedWhenInUse:
+            defer {
+                self.locationPermissionContinuation = nil
+            }
             locationPermissionContinuation.resume(returning: ())
         default:
+            defer {
+                self.locationPermissionContinuation = nil
+            }
             locationPermissionContinuation.resume(throwing: DailyWeatherServiceError.permissionDenied)
             
         }
@@ -115,10 +129,16 @@ extension DefaultDailyWeatherService: CLLocationManagerDelegate {
         }
         
         guard let location = locations.last else {
+            defer {
+                self.locationContinuation = nil
+            }
             locationContinuation.resume(throwing: DailyWeatherServiceError.unknownLocation)
             return
         }
         
+        defer {
+            self.locationContinuation = nil
+        }
         locationContinuation.resume(returning: location)
     }
 }
