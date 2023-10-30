@@ -11,7 +11,8 @@ extension DailyUVIndex {
     static func stub() -> DailyUVIndex {
         DailyUVIndex(
             value: 4,
-            exposureCatagory: .moderate
+            exposureCatagory: .moderate,
+            description: "Moderate"
         )
     }
 }

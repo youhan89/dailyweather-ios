@@ -11,13 +11,15 @@ import WeatherKit
 public struct DailyUVIndex {
     public let value: Int
     public let exposureCatagory: DailyUVExposureCategory
+    public let description: String
 }
 
 extension DailyUVIndex {
     static func from(_ weatherKit: UVIndex) -> DailyUVIndex {
         DailyUVIndex(
             value: weatherKit.value,
-            exposureCatagory: .from(weatherKit.category)
+            exposureCatagory: .from(weatherKit.category),
+            description: weatherKit.category.description
         )
     }
 }
