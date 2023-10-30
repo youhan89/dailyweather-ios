@@ -15,7 +15,7 @@ public final class DefaultDailyWeatherService: NSObject, DailyWeatherService  {
     private let locationManager = CLLocationManager()
     private let weatherKit = WeatherService.shared
     
-    private var locationPermissionContinuation: CheckedContinuation<(), Error>? = nil
+    private var locationPermissionContinuation: CheckedContinuation<CLAuthorizationStatus, Error>? = nil
     private var locationContinuation: CheckedContinuation<CLLocation, Error>? = nil
     
     private var cachedForecast: [DailyForecast] = []
@@ -31,11 +31,11 @@ public final class DefaultDailyWeatherService: NSObject, DailyWeatherService  {
         locationManager.authorizationStatus
     }
     
-    public func requestLocationPermission(always: Bool = false) async throws {
+    public func requestLocationPermission(always: Bool = false) async throws -> CLAuthorizationStatus {
         switch locationManager.authorizationStatus {
         case .notDetermined:
             Logger.weatherHandler.info("Location permission requested [always: \(always)]")
-            try await withCheckedThrowingContinuation { continuation in
+            return try await withCheckedThrowingContinuation { continuation in
                 locationPermissionContinuation = continuation
                 if always {
                     locationManager.requestAlwaysAuthorization()
@@ -46,7 +46,7 @@ public final class DefaultDailyWeatherService: NSObject, DailyWeatherService  {
             
         case .authorizedAlways, .authorizedWhenInUse:
             Logger.weatherHandler.debug("Location permission already granted]")
-            return
+            return locationManager.authorizationStatus
             
         default:
             Logger.weatherHandler.error("Location permission denied [status: \(String(describing: self.locationManager.authorizationStatus))]")
@@ -73,7 +73,9 @@ public final class DefaultDailyWeatherService: NSObject, DailyWeatherService  {
         }
         
         do {
-            cachedForecast = try await weatherKit.weather(for: location).dailyForecast.map { .from($0) }
+            let attribution = try await weatherKit.attribution
+            cachedForecast = try await weatherKit.weather(for: location).dailyForecast.map { .from($0, attribution: attribution) }
+            
             return cachedForecast
         } catch {
             Logger.weatherHandler.error("WeatherKit.get failed [error: \(String(describing: error))]")
@@ -112,7 +114,7 @@ extension DefaultDailyWeatherService: CLLocationManagerDelegate {
             defer {
                 self.locationPermissionContinuation = nil
             }
-            locationPermissionContinuation.resume(returning: ())
+            locationPermissionContinuation.resume(returning: manager.authorizationStatus)
         default:
             defer {
                 self.locationPermissionContinuation = nil

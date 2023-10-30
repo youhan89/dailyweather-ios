@@ -12,8 +12,8 @@ import OSLog
 public class MockedDailyWeatherService: DailyWeatherService {
     public init() {}
     
-    public func requestLocationPermission(always: Bool) async throws {
-        return
+    public func requestLocationPermission(always: Bool) async throws -> CLAuthorizationStatus{
+        return .authorizedAlways
     }
     
     public func locationPermission() -> CLAuthorizationStatus {

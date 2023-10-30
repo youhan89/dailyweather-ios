@@ -21,6 +21,7 @@ public final class DailyForecast: Identifiable {
     public let precipitation: DailyPrecipitation
     public let moon: DailyMoon?
     public let sun: DailySun?
+    public let attribution: DailyWeatherAttribution
     
     public init(
         date: Date,
@@ -31,7 +32,8 @@ public final class DailyForecast: Identifiable {
         description: String,
         precipitation: DailyPrecipitation,
         moon: DailyMoon?,
-        sun: DailySun?
+        sun: DailySun?,
+        attribution: DailyWeatherAttribution
     ) {
         self.date = date
         self.highTemperature = highTemperature
@@ -42,6 +44,7 @@ public final class DailyForecast: Identifiable {
         self.precipitation = precipitation
         self.moon = moon
         self.sun = sun
+        self.attribution = attribution
     }
 }
 
@@ -73,7 +76,7 @@ extension DailyForecast: Hashable {
 }
 
 public extension DailyForecast {
-    static func from(_ weatherKit: DayWeather) -> DailyForecast {
+    static func from(_ weatherKit: DayWeather, attribution: WeatherAttribution) -> DailyForecast {
         DailyForecast(
             date: weatherKit.date,
             highTemperature: weatherKit.highTemperature,
@@ -83,7 +86,8 @@ public extension DailyForecast {
             description: weatherKit.condition.description,
             precipitation: .from(weatherKit),
             moon: .from(weatherKit.moon),
-            sun: .from(weatherKit.sun)
+            sun: .from(weatherKit.sun),
+            attribution: .from(attribution)
             // UVINDEX
             // weatherKit.condition
         )

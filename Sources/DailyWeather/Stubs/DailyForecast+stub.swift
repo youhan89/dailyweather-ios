@@ -19,7 +19,8 @@ public extension DailyForecast {
             description: "Light rain",
             precipitation: .stubLightRain(),
             moon: .stub(),
-            sun: .stub()
+            sun: .stub(),
+            attribution: .stub()
         )
     }
     
@@ -33,7 +34,8 @@ public extension DailyForecast {
             description: "Sun",
             precipitation: .stubNoRain(),
             moon: .stub(),
-            sun: .stub()
+            sun: .stub(),
+            attribution: .stub()
         )
     }
     
@@ -47,7 +49,8 @@ public extension DailyForecast {
             description: "Snow",
             precipitation: .stubLightSnow(),
             moon: .stub(),
-            sun: .stub()
+            sun: .stub(),
+            attribution: .stub()
         )
     }
 }
