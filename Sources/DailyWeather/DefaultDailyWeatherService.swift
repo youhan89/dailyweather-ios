@@ -65,11 +65,6 @@ public final class DefaultDailyWeatherService: NSObject, DailyWeatherService  {
     }
     
     public func updateLocation() async throws -> CLLocation {
-        if let cachedLocation {
-            Logger.weatherHandler.info("UpdateLocation() returning cached forecast]")
-            return cachedLocation
-        }
-        
         return try await withCheckedThrowingContinuation { continuation in
             locationContinuation = continuation
             locationManager.requestLocation()
