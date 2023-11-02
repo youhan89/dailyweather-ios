@@ -9,6 +9,7 @@ import Foundation
 import SwiftData
 import WeatherKit
 
+@Observable
 public final class DailyForecast: Identifiable {
     public var id: String { ISO8601DateFormatter().string(from: date) }
     
