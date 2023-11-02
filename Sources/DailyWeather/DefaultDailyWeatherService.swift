@@ -31,6 +31,10 @@ public final class DefaultDailyWeatherService: NSObject, DailyWeatherService  {
         locationManager.authorizationStatus
     }
     
+    public func resetWeatherCache() {
+        cachedForecast = []
+    }
+    
     public func requestLocationPermission(always: Bool = false) async throws -> CLAuthorizationStatus {
         switch locationManager.authorizationStatus {
         case .notDetermined:
