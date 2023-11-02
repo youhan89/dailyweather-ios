@@ -29,4 +29,6 @@ public class MockedDailyWeatherService: DailyWeatherService {
         Logger.weatherHandler.debug("DailyWeatherService returning mocked forecast")
         return [ .stubSunnyDay(), .stubRainyDay(), .stubSnowDay() ]
     }
+    
+    public func resetCache() { }
 }

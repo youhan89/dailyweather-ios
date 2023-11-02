@@ -13,4 +13,5 @@ public protocol DailyWeatherService {
     func updateLocation() async throws -> CLLocation
     func updateWeather(forLocation location: CLLocation) async throws -> [DailyForecast]
     func locationPermission() -> CLAuthorizationStatus
+    func resetCache()
 }
