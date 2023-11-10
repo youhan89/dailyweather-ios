@@ -24,6 +24,7 @@ public final class DailyForecast: Identifiable {
     public let sun: DailySun?
     public let attribution: DailyWeatherAttribution
     public let uvIndex: DailyUVIndex
+    public let condition: DailyForecastCondition
     
     public init(
         date: Date,
@@ -36,7 +37,8 @@ public final class DailyForecast: Identifiable {
         moon: DailyMoon?,
         sun: DailySun?,
         attribution: DailyWeatherAttribution,
-        uvIndex: DailyUVIndex
+        uvIndex: DailyUVIndex,
+        condition: DailyForecastCondition
     ) {
         self.date = date
         self.highTemperature = highTemperature
@@ -49,6 +51,7 @@ public final class DailyForecast: Identifiable {
         self.sun = sun
         self.attribution = attribution
         self.uvIndex = uvIndex
+        self.condition = condition
     }
 }
 
@@ -92,7 +95,8 @@ public extension DailyForecast {
             moon: .from(weatherKit.moon),
             sun: .from(weatherKit.sun),
             attribution: .from(attribution),
-            uvIndex: .from(weatherKit.uvIndex)
+            uvIndex: .from(weatherKit.uvIndex),
+            condition: .from(weatherKit.condition)
         )
     }
 }

@@ -21,7 +21,8 @@ public extension DailyForecast {
             moon: .stub(),
             sun: .stub(),
             attribution: .stub(),
-            uvIndex: .stub()
+            uvIndex: .stub(),
+            condition: .rain
         )
     }
     
@@ -37,7 +38,8 @@ public extension DailyForecast {
             moon: .stub(),
             sun: .stub(),
             attribution: .stub(),
-            uvIndex: .stub()
+            uvIndex: .stub(),
+            condition: .clear
         )
     }
     
@@ -53,7 +55,8 @@ public extension DailyForecast {
             moon: .stub(),
             sun: .stub(),
             attribution: .stub(),
-            uvIndex: .stub()
+            uvIndex: .stub(),
+            condition: .snow
         )
     }
 }

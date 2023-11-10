@@ -11,7 +11,15 @@ public extension DailySun {
     static func stub() -> DailySun {
         return DailySun(
             sunrise: StubUtils.sunriseDate,
-            sunset: StubUtils.sunsetDate
+            sunset: StubUtils.sunsetDate,
+            nauticalSunrise: StubUtils.sunriseDate,
+            nauticalSunset: StubUtils.sunsetDate,
+            astronomicalSunrise: StubUtils.sunriseDate,
+            astronomicalSunset: StubUtils.sunsetDate,
+            civilSunrise: StubUtils.sunriseDate,
+            civilSunset: StubUtils.sunsetDate,
+            solarMidnight: StubUtils.sunsetDate,
+            solarNoon: StubUtils.sunriseDate
         )
     }
 }
