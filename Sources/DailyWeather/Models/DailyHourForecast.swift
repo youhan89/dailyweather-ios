@@ -23,6 +23,7 @@ public struct DailyHourForecast {
     public let wind: DailyWind
     public let date: Date
     public let precipitation: PrecipitationType
+    public let precipitationAmount: Measurement<UnitLength>
     public let precipitationChance: Double
     public let sfSymbol: String
 }
@@ -44,6 +45,7 @@ public extension DailyHourForecast {
             wind: .from(weatherKit.wind),
             date: weatherKit.date,
             precipitation: .from(weatherKit.precipitation),
+            precipitationAmount: weatherKit.precipitationAmount,
             precipitationChance: weatherKit.precipitationChance,
             sfSymbol: weatherKit.symbolName
         )
@@ -65,6 +67,7 @@ public extension DailyHourForecast {
             wind: .stubNormal(),
             date: .now,
             precipitation: .rain,
+            precipitationAmount: .init(value: 10.0, unit: .millimeters),
             precipitationChance: 0.5,
             sfSymbol: "cloud.sun.fill"
         )
