@@ -25,6 +25,7 @@ public final class DailyForecast: Identifiable {
     public let attribution: DailyWeatherAttribution
     public let uvIndex: DailyUVIndex
     public let condition: DailyForecastCondition
+    public let hourForecast: [DailyHourForecast]
     
     public init(
         date: Date,
@@ -38,7 +39,8 @@ public final class DailyForecast: Identifiable {
         sun: DailySun?,
         attribution: DailyWeatherAttribution,
         uvIndex: DailyUVIndex,
-        condition: DailyForecastCondition
+        condition: DailyForecastCondition,
+        hourForecast: [DailyHourForecast]
     ) {
         self.date = date
         self.highTemperature = highTemperature
@@ -52,6 +54,7 @@ public final class DailyForecast: Identifiable {
         self.attribution = attribution
         self.uvIndex = uvIndex
         self.condition = condition
+        self.hourForecast = hourForecast
     }
 }
 
@@ -83,7 +86,7 @@ extension DailyForecast: Hashable {
 }
 
 public extension DailyForecast {
-    static func from(_ weatherKit: DayWeather, attribution: WeatherAttribution) -> DailyForecast {
+    static func from(_ weatherKit: WeatherKit.DayWeather, hourlyWeather: [WeatherKit.HourWeather], attribution: WeatherAttribution) -> DailyForecast {
         DailyForecast(
             date: weatherKit.date,
             highTemperature: weatherKit.highTemperature,
@@ -96,7 +99,8 @@ public extension DailyForecast {
             sun: .from(weatherKit.sun),
             attribution: .from(attribution),
             uvIndex: .from(weatherKit.uvIndex),
-            condition: .from(weatherKit.condition)
+            condition: .from(weatherKit.condition),
+            hourForecast: hourlyWeather.map { DailyHourForecast.from($0) }
         )
     }
 }

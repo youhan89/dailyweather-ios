@@ -22,7 +22,8 @@ public extension DailyForecast {
             sun: .stub(),
             attribution: .stub(),
             uvIndex: .stub(),
-            condition: .rain
+            condition: .rain,
+            hourForecast: Array.init(repeating: .stub(), count: 24)
         )
     }
     
@@ -39,7 +40,8 @@ public extension DailyForecast {
             sun: .stub(),
             attribution: .stub(),
             uvIndex: .stub(),
-            condition: .clear
+            condition: .clear,
+            hourForecast: Array.init(repeating: .stub(), count: 24)
         )
     }
     
@@ -56,7 +58,8 @@ public extension DailyForecast {
             sun: .stub(),
             attribution: .stub(),
             uvIndex: .stub(),
-            condition: .snow
+            condition: .snow,
+            hourForecast: Array.init(repeating: .stub(), count: 24)
         )
     }
 }

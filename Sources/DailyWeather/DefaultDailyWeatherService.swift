@@ -84,7 +84,14 @@ public final class DefaultDailyWeatherService: NSObject, DailyWeatherService  {
         
         do {
             let attribution = try await weatherKit.attribution
-            let dailyWeatherList: [DailyForecast] = try await weatherKit.weather(for: location).dailyForecast.map { .from($0, attribution: attribution) }
+            let weather = try await weatherKit.weather(for: location)
+            
+            var dailyWeatherList: [DailyForecast] = []
+            
+            weather.dailyForecast.forEach { dayWeather in
+                let hours = weather.hourlyForecast.filter { $0.date == dayWeather.date }
+                dailyWeatherList.append(.from(dayWeather, hourlyWeather: hours, attribution: attribution))
+            }
             
             cache.date = Date()
             cache.data = dailyWeatherList
